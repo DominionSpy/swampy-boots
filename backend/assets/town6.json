@@ -1,0 +1,102 @@
+{
+  "style": {
+    "panelBackground": "#7f5b00",
+    "gridBackground": "#7f5b00",
+    "gridColor": "#1e0f00",
+    "primaryPathColor": "#fcfc00",
+    "lineWidth": 0.3
+  },
+  "grid": {
+    "type": "triangle",
+    "cols": [3,5,3,5,3,5,3]
+  },
+  "elements": [
+    {
+      "type": "start",
+      "pos": {
+        "x": 2,
+        "y": 2
+      }
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 0
+      },
+      "dir": 240
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 2,
+        "y": 0
+      },
+      "dir": 300
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 2
+      },
+      "dir": 180
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 4,
+        "y": 2
+      },
+      "dir": 0
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 6
+      },
+      "dir": 180
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 4,
+        "y": 6
+      },
+      "dir": 0
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 10
+      },
+      "dir": 180
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 4,
+        "y": 10
+      },
+      "dir": 0
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 12
+      },
+      "dir": 120
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 4,
+        "y": 12
+      },
+      "dir": 60
+    }
+  ]
+}

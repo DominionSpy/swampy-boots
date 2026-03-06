@@ -13,8 +13,10 @@ mongoose
   .connect(config.MONGODB_URI, { family: 4 })
   .catch(error => logger.error('error connecting to MongoDB:', error.message))
 
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(middleware.requestLogger)
+app.use(middleware.clacks)
 
 app.use('/api/panels', panelRouter)
 
@@ -23,7 +25,6 @@ if (process.env.NODE_ENV === 'test') {
   app.use('/api/testing', testingRouter)
 }
 
-app.use(middleware.clacks)
 app.use(middleware.unknownEndpoint)
 app.use(middleware.errorHandler)
 

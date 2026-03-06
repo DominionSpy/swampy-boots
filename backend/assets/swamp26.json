@@ -1,0 +1,110 @@
+{
+  "title": "Swampy Boots",
+  "style": {
+    "panelBackground": "#707715",
+    "gridBackground": "#9fb100",
+    "gridColor": "#c4be72",
+    "primaryPathColor": "#ffffff",
+    "lineWidth": 0.3
+  },
+  "grid": {
+    "type": "square",
+    "cols": 9,
+    "rows": 9
+  },
+  "elements": [
+    {
+      "type": "start",
+      "pos": {
+        "x": 0,
+        "y": 8
+      }
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 8,
+        "y": 0
+      },
+      "dir": 270
+    },
+    {
+      "type": "polyomino",
+      "pos": {
+        "x": 1,
+        "y": 1
+      },
+      "color": "yellow",
+      "shape": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 2
+        }],
+      "rotatable": false
+    },
+    {
+      "type": "polyomino",
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "color": "yellow",
+      "shape": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 0,
+          "y": 2
+        }],
+      "rotatable": false
+    },
+    {
+      "type": "polyomino",
+      "pos": {
+        "x": 1,
+        "y": 2
+      },
+      "color": "yellow",
+      "shape": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 3,
+          "y": 0
+        },
+        {
+          "x": 3,
+          "y": 1
+        }],
+      "rotatable": false
+    }
+  ]
+}
