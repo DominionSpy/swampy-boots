@@ -3,8 +3,8 @@
   "style": {
     "panelBackground": "lightorange",
     "gridBackground": "lightorange",
-    "primaryPathColor": "darkbrown",
-    "lineColor": "yellow",
+    "gridColor": "darkbrown",
+    "primaryPathColor": "yellow",
     "lineWidth": 0.3
   },
   "grid": {

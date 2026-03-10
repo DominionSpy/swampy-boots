@@ -13,7 +13,10 @@ mongoose
   .connect(config.MONGODB_URI, { family: 4 })
   .catch(error => logger.error('error connecting to MongoDB:', error.message))
 
-app.use(express.static('dist'))
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('dist'))
+}
+
 app.use(express.json())
 app.use(middleware.requestLogger)
 app.use(middleware.clacks)

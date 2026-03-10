@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 
 import panelService from './services/panels'
 
+import Panel from './components/Panel'
+
 const App = () => {
   const [panels, setPanels] = useState([])
 
@@ -16,9 +18,7 @@ const App = () => {
   return (
     <>
       {panels.map(panel =>
-        <div key={panel.id}>
-          {panel.id} {panel.title}
-        </div>
+        <Panel key={panel.id} panel={panel} />
       )}
     </>
   )
