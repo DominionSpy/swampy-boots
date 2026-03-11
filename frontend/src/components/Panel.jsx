@@ -1,49 +1,18 @@
-const Panel = ({ panel }) => {
-  const NAMED_COLORS = {
-    darkbrown: '#3a1e08',
-    red: '#b82828',
-    orange: '#c86018',
-    lightorange: '#c87830',
-    yellow: '#c8a830',
-    green: '#289838',
-    olive: '#5c6b22',
-    lightolive: '#8a9e30',
-    blue: '#3878b8',
-    cyan: '#38a8a8',
-    purple: '#7028b8',
-    pink: '#c84888',
-    black: '#0e100a',
-    darkgray: '#1a1c0e',
-    lightgray: '#a0a888',
-    white: '#ffffff',
-  }
+import { getPanelStyle, getGridStyle } from '../utils/style.js'
+import Element from './Element'
+import { defs } from './Element'
 
-  const resolveColor = (color) => {
-    if (!color) return '#ffffff'
-    return NAMED_COLORS[color.toLowerCase()] ?? color
-  }
+const Panel = ({ panel, width, height }) => {
+  const panelWidth = panel.grid.cols * 2
+  const panelHeight = panel.grid.rows * 2
+  const viewBox = `0 0 ${panelWidth} ${panelHeight}`
+  const lw = panel.style.lineWidth
+  const hw = lw / 2
 
-  const panelWidth = 150
-  const panelHeight = 150
-  const panelPadding = 10
-  const lw = 0.6
-  const hw = lw/2
-
-  const style = {
+  const containerStyle = {
     display: 'inline-block',
-    width: panelWidth,
-    height: panelHeight,
-    borderWidth: 1,
-    borderColor: 'yellow',
-    borderStyle: 'solid',
-  }
-
-  const panelStyle = {
-    fill: resolveColor(panel.style.panelBackground),
-  }
-
-  const gridStyle = {
-    fill: resolveColor(panel.style.gridColor),
+    width: width,
+    height: height,
   }
 
   const isGap = (x, y) => {
@@ -67,7 +36,7 @@ const Panel = ({ panel }) => {
 
   const mod360 = (value) => (value + 360) % 360
 
-  const getPath = () => {
+  const renderGrid = () => {
     const nodes = []
     switch (panel.grid.type) {
       case 'square':
@@ -135,25 +104,21 @@ const Panel = ({ panel }) => {
       startNode = sortedNodes[0]
     }
 
-    return gridPath
+    return (
+      <path d={gridPath} style={getGridStyle(panel.style)} />
+    )
   }
 
-  const gridPath = getPath()
-  const scale = (100 - (2 * panelPadding))/((panel.grid.cols - 1) * 2)
-
   return (
-    <div style={style}>
-      <span>{panel.title}</span>
+    <div style={containerStyle}>
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        width='100%'
-        height='100%'
-        viewBox='0 0 100 100'>
-        <rect width='100' height='100' style={panelStyle} />
-        <g transform={`translate(${panelPadding},${panelPadding}) scale(${scale})`}>
-          <path
-            d={gridPath}
-            style={gridStyle} />
+        viewBox={viewBox}>
+        {defs(panel)}
+        <rect width={panelWidth} height={panelHeight} style={getPanelStyle(panel.style)} />
+        <g transform={`translate(1,1)`}>
+          {renderGrid()}
+          {panel.elements.map(element => <Element key={element.id} id={panel.id} element={element} />)}
         </g>
       </svg>
     </div>

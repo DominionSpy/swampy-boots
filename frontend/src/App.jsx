@@ -18,7 +18,7 @@ const App = () => {
   return (
     <>
       {panels.map(panel =>
-        <Panel key={panel.id} panel={panel} />
+        <Panel key={panel.id} panel={panel} height='150' width='150' />
       )}
     </>
   )

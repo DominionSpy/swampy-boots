@@ -134,6 +134,7 @@ const ElementSchema = Schema({
   {
     toJSON: {
       transform: function (document, returnedObject) {
+        returnedObject.id = returnedObject._id.toString()
         deleteIdAndVersion(returnedObject)
       }
     }

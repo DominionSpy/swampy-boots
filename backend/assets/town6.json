@@ -4,7 +4,7 @@
     "gridBackground": "#7f5b00",
     "gridColor": "#1e0f00",
     "primaryPathColor": "#fcfc00",
-    "lineWidth": 0.3
+    "lineWidth": 0.6
   },
   "grid": {
     "type": "triangle",
