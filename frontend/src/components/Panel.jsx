@@ -97,8 +97,8 @@ const Panel = ({ panel, width, height }) => {
           .sort((a, b) => mod360(a[0] + 180 - direction - 1) - mod360(b[0] + 180 - direction - 1))[0]
 
         if (mod360(direction - nextEdge[0]) === 180) {
-          const deadEnd = `L${getCoords(currentNode[0].x, currentNode[0].y, (direction + 90) % 360)}`
-            + `L${getCoords(currentNode[0].x, currentNode[0].y, (direction + 180) % 360)}`
+          const deadEnd = `L${getCoords(currentNode[0].x, currentNode[0].y, mod360(direction + 90))}`
+            + `L${getCoords(currentNode[0].x, currentNode[0].y, mod360(direction + 180))}`
           if (perimeter) {
             perimeterPath += deadEnd
           } else {
@@ -113,19 +113,45 @@ const Panel = ({ panel, width, height }) => {
             internalPath += arc
           }
         }
-        const line = `L${getCoords(nextEdge[1].x, nextEdge[1].y, nextEdge[0])}`
-        if (perimeter) {
-          perimeterPath += line
+        const edgePos = {
+          x: (currentNode[0].x + nextEdge[1].x) / 2,
+          y: (currentNode[0].y + nextEdge[1].y) / 2,
+        }
+        if (panel.elements.filter(element =>
+          element.type === 'gap'
+          && element.pos.x === edgePos.x
+          && element.pos.y === edgePos.y
+        ).length > 0) {
+          const gapEnd = `L${getCoords(edgePos.x, edgePos.y, nextEdge[0])}`
+            + `L${getCoords(edgePos.x, edgePos.y, mod360(nextEdge[0] - 90))}`
+            + `L${getCoords(currentNode[0].x, currentNode[0].y, mod360(nextEdge[0] + 180))}`
+          if (perimeter) {
+            perimeterPath += gapEnd
+          } else {
+            internalPath += gapEnd
+          }
+
+          currentNode[1].splice(currentNode[1].indexOf(nextEdge), 1)
+          if (currentNode.length < 2 || currentNode[1].length === 0) {
+            sortedNodes.splice(sortedNodes.indexOf(currentNode), 1)
+          }
+          direction = mod360(nextEdge[0] + 180)
         } else {
-          internalPath += line
+          const line = `L${getCoords(nextEdge[1].x, nextEdge[1].y, nextEdge[0])}`
+          if (perimeter) {
+            perimeterPath += line
+          } else {
+            internalPath += line
+          }
+
+          currentNode[1].splice(currentNode[1].indexOf(nextEdge), 1)
+          if (currentNode.length < 2 || currentNode[1].length === 0) {
+            sortedNodes.splice(sortedNodes.indexOf(currentNode), 1)
+          }
+          direction = nextEdge[0]
+          currentNode = sortedNodes.find(node => JSON.stringify(node[0]) === JSON.stringify(nextEdge[1]))
         }
 
-        currentNode[1].splice(currentNode[1].indexOf(nextEdge), 1)
-        if (currentNode.length < 2 || currentNode[1].length === 0) {
-          sortedNodes.splice(sortedNodes.indexOf(currentNode), 1)
-        }
-        direction = nextEdge[0]
-        currentNode = sortedNodes.find(node => JSON.stringify(node[0]) === JSON.stringify(nextEdge[1]))
         if (!currentNode || (currentNode === startNode && initialDirection === direction)) {
           break;
         }
