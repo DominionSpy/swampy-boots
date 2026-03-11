@@ -12,24 +12,22 @@ const NAMED_COLORS = {
   purple: '#7028b8',
   pink: '#c84888',
   black: '#0e100a',
-  darkgray: '#1a1c0e',
-  lightgray: '#a0a888',
+  darkgray: '#45444B',
+  darkgrey: '#45444B',
+  gray: '#7a7b7f',
+  grey: '#7a7b7f',
+  lightgray: '#c3c3c7',
+  lightgrey: '#c3c3c7',
   white: '#ffffff',
 }
 
-export const resolveColor = color => {
+const resolveColor = color => {
   if (!color) return '#ffffff'
   return NAMED_COLORS[color.toLowerCase()] ?? color
 }
 
-export const getPanelStyle = style => {
+export const getStyle = color => {
   return {
-    fill: resolveColor(style.panelBackground),
-  }
-}
-
-export const getGridStyle = style => {
-  return {
-    fill: resolveColor(style.gridColor),
+    fill: resolveColor(color),
   }
 }

@@ -1,43 +1,43 @@
-import { getGridStyle } from '../utils/style'
+import { getStyle } from '../utils/style'
 
-export const defs = (panel) => {
-  const lw = panel.style.lineWidth
-  const hw = lw / 2
-
-  const endPath = `M${-hw},${hw}L${-hw},${-lw}A${hw},${hw},0,0,1,${hw},${-lw}L${hw},${hw}Z`
-
-  return (
-    <defs>
-      <g id={'start' + panel.id}>
-        <circle r={lw} style={getGridStyle(panel.style)} />
-      </g>
-      <g id={'end' + panel.id}>
-        <path d={endPath} style={getGridStyle(panel.style)} />
-      </g>
-    </defs>
-  )
-}
-
-const Element = ({ id, element }) => {
+const Element = ({ panelId, element }) => {
   const transform = (element.dir ? `rotate(${element.dir}) ` : '')
     + `translate(${element.pos.x}, ${element.pos.y})`
+
+  const style = element.color ? getStyle(element.color) : ''
 
   switch (element.type) {
     case 'start':
       return (
-        <use href={'#start' + id} transform={transform} />
+        <use href={'#start' + panelId} transform={transform} />
       )
     case 'end':
       return (
-        <use href={'#end' + id} transform={transform} />
+        <use href={'#end' + panelId} transform={transform} />
       )
     case 'polyomino':
-      return
-    case 'gap':
-      // Handled by renderGrid
-      return
+      const translateX = element.shape
+        .map(block => block.x)
+        .sort((a, b) => b - a)[0] / 2
+      const translateY = element.shape
+        .map(block => block.y)
+        .sort((a, b) => b - a)[0] / 2
+      const polyTransform = `${transform} scale(0.35) translate(-${translateX},-${translateY})`
+      let key = 0
+      return (
+        <g transform={polyTransform}>
+          {element.shape.map(block =>
+            <use
+              key={key++}
+              href={`#block${panelId}`}
+              transform={`translate(${block.x},${block.y})`}
+              style={style}
+            />
+          )}
+        </g>
+      )
     default:
-      throw new Error('unsupported element type')
+      return
   }
 }
 

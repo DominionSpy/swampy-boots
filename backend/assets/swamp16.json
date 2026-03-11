@@ -1,67 +1,37 @@
 {
-  "title": "Swampy Boots",
+  "title": "Swamp Tram",
   "style": {
-    "panelBackground": "#707715",
-    "gridBackground": "#9fb100",
-    "gridColor": "#c4be72",
-    "primaryPathColor": "#ffffff",
-    "lineWidth": 0.5
+    "panelBackground": "darkgrey",
+    "gridBackground": "grey",
+    "gridColor": "lightgrey",
+    "primaryLineColor": "white",
+    "lineWidth": 0.6
   },
   "grid": {
     "type": "square",
-    "cols": 9,
-    "rows": 9
+    "cols": 8,
+    "rows": 4
   },
   "elements": [
     {
       "type": "start",
       "pos": {
         "x": 0,
-        "y": 8
+        "y": 6
       }
     },
     {
       "type": "end",
       "pos": {
-        "x": 8,
+        "x": 14,
         "y": 0
       },
-      "dir": 270
+      "dir": 0
     },
     {
       "type": "polyomino",
       "pos": {
         "x": 1,
-        "y": 1
-      },
-      "color": "yellow",
-      "shape": [
-        {
-          "x": 0,
-          "y": 0
-        },
-        {
-          "x": 1,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 0
-        },
-        {
-          "x": 2,
-          "y": 1
-        },
-        {
-          "x": 2,
-          "y": 2
-        }],
-      "rotatable": false
-    },
-    {
-      "type": "polyomino",
-      "pos": {
-        "x": 7,
         "y": 3
       },
       "color": "yellow",
@@ -77,14 +47,38 @@
         {
           "x": 0,
           "y": 2
-        }],
+        }
+      ],
       "rotatable": false
     },
     {
       "type": "polyomino",
       "pos": {
-        "x": 3,
-        "y": 5
+        "x": 7,
+        "y": 3
+      },
+      "color": "yellow",
+      "shape": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 2,
+          "y": 0
+        }
+      ],
+      "rotatable": false
+    },
+    {
+      "type": "polyomino",
+      "pos": {
+        "x": 13,
+        "y": 3
       },
       "color": "yellow",
       "shape": [
@@ -97,13 +91,10 @@
           "y": 1
         },
         {
-          "x": 3,
-          "y": 0
-        },
-        {
-          "x": 3,
-          "y": 1
-        }],
+          "x": 0,
+          "y": 2
+        }
+      ],
       "rotatable": false
     }
   ]
