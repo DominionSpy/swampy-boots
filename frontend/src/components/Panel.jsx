@@ -1,13 +1,14 @@
-import { getStyle } from '../utils/style.js'
+import { getFillStyle } from '../utils/style'
+import { renderCorner, renderEnd, renderGap } from '../utils/svg'
+import { getRotate } from '../utils/math'
 import Defs from './Defs'
 import Element from './Element'
 
 const Panel = ({ panel, width, height }) => {
   const panelWidth = panel.grid.cols * 2
   const panelHeight = panel.grid.rows * 2
-  const viewBox = `0 0 ${panelWidth} ${panelHeight}`
-  const lw = panel.style.lineWidth
-  const hw = lw / 2
+  const lineWidth = panel.style.lineWidth
+  const halfLineWidth = lineWidth / 2
 
   const containerStyle = {
     display: 'inline-block',
@@ -21,62 +22,73 @@ const Panel = ({ panel, width, height }) => {
       panel.grid.gaps.find(g => g.x === x && g.y === y)
   }
 
-  const getCoords = (x, y, direction) => {
-    const xLineDiff = (direction <= 90 || direction > 270) ? -hw : hw
-    const yLineDiff = (direction > 0 && direction <= 180) ? -hw : hw
-    return `${x + xLineDiff},${y + yLineDiff}`
+  const getGapElement = (x, y) => {
+    return panel.elements.find(e => e.type === 'gap' && e.pos.x === x && e.pos.y === y)
   }
 
-  const getEdgeCoords = (x, y, direction) => {
-    const xLineDiff = (direction <= 45 || direction > 315) ? -hw
-      : (direction > 135 && direction <= 225) ? hw : 0
-    const yLineDiff = (direction > 45 && direction <= 135) ? -hw
-      : (direction > 225 && direction <= 315) ? hw : 0
-    return `${x + xLineDiff},${y + yLineDiff}`
+  const getEndElement = (x, y) => {
+    return panel.elements.find(e => e.type === 'end' && e.pos.x === x && e.pos.y === y)
   }
 
   const mod360 = (value) => (value + 360) % 360
 
+  const removeEdge = (nodes, node, edge) => {
+    node[1].splice(node[1].indexOf(edge), 1)
+    if (node.length < 2 || node[1].length === 0) {
+      nodes.splice(nodes.indexOf(node), 1)
+    }
+  }
+
   const renderGrid = () => {
     const nodes = []
     switch (panel.grid.type) {
-      case 'square':
-        for (let x = 0; x < panel.grid.cols; x++) {
-          for (let y = 0; y < panel.grid.rows; y++) {
-            const nodeX = x * 2;
-            const nodeY = y * 2;
-            const edges = []
-            if (x > 0 && !isGap(nodeX - 1, nodeY)) {
-              edges.push([270, {x: nodeX - 2, y: nodeY}])
-            }
-            if (x < panel.grid.cols - 1 && !isGap(nodeX + 1, nodeY)) {
-              edges.push([90, {x : nodeX + 2, y : nodeY}])
-            }
-            if (y > 0 && !isGap(nodeX, nodeY - 1)) {
-              edges.push([0, {x: nodeX, y: nodeY - 2}])
-            }
-            if (y < panel.grid.rows - 1 && !isGap(nodeX, nodeY + 1)) {
-              edges.push([180, {x : nodeX, y : nodeY + 2}])
-            }
-            if (edges.length > 0) {
-              nodes.push([{x: nodeX, y: nodeY}, edges])
-            }
+    case 'square':
+      for (let x = 0; x < panel.grid.cols; x++) {
+        for (let y = 0; y < panel.grid.rows; y++) {
+          const nodeX = x * 2
+          const nodeY = y * 2
+          const edges = []
+          const endElement = getEndElement(nodeX, nodeY)
+          if (endElement) {
+            const endPosition = getRotate(0, -lineWidth, endElement.dir)
+            const endX = nodeX + endPosition.x
+            const endY = nodeY + endPosition.y
+            edges.push([endElement.dir, { x: endX, y: endY }])
+          }
+          if (x > 0 && !isGap(nodeX - 1, nodeY)) {
+            edges.push([270, { x: nodeX - 2, y: nodeY }])
+          }
+          if (x < panel.grid.cols - 1 && !isGap(nodeX + 1, nodeY)) {
+            edges.push([90, { x : nodeX + 2, y : nodeY }])
+          }
+          if (y > 0 && !isGap(nodeX, nodeY - 1)) {
+            edges.push([0, { x: nodeX, y: nodeY - 2 }])
+          }
+          if (y < panel.grid.rows - 1 && !isGap(nodeX, nodeY + 1)) {
+            edges.push([180, { x : nodeX, y : nodeY + 2 }])
+          }
+          if (edges.length > 0) {
+            nodes.push([{ x: nodeX, y: nodeY }, edges])
           }
         }
-        break;
-      default:
-        throw new Error('unsupported grid type')
+      }
+      break
+    default:
+      return
     }
 
-    let perimeterPath = ''
-    let internalPath = ''
-    const sortedNodes = nodes
-      .sort((a, b) => (a[0].y !== b[0].y) ? a[0].y - b[0].y : a[0].x - b[0].x)
-    let startNode = sortedNodes[0]
+    nodes.sort((a, b) =>
+      (a[0].y !== b[0].y)
+        ? a[0].y - b[0].y
+        : a[0].x - b[0].x)
+
+    const perimeters = []
+    const internals = []
+
     let initialDirection = 0
     let perimeter = true
+    let startNode = nodes[0]
     while (startNode) {
-      // Trace a contour
       if (startNode[1].filter(edge => edge[0] < 135).length > 0) {
         initialDirection = 0
         perimeter = true
@@ -84,87 +96,84 @@ const Panel = ({ panel, width, height }) => {
         initialDirection = 270
         perimeter = false
       }
-      let currentNode = startNode
-      let direction = initialDirection
-      const move = `M${getCoords(currentNode[0].x, currentNode[0].y, direction)}`
-      if (perimeter) {
-        perimeterPath += move
-      } else {
-        internalPath += move
-      }
-      while (true) {
-        const nextEdge = currentNode[1]
-          .sort((a, b) => mod360(a[0] + 180 - direction - 1) - mod360(b[0] + 180 - direction - 1))[0]
 
-        if (mod360(direction - nextEdge[0]) === 180) {
-          const deadEnd = `L${getCoords(currentNode[0].x, currentNode[0].y, mod360(direction + 90))}`
-            + `L${getCoords(currentNode[0].x, currentNode[0].y, mod360(direction + 180))}`
-          if (perimeter) {
-            perimeterPath += deadEnd
-          } else {
-            internalPath += deadEnd
-          }
-        } else if (mod360(direction - nextEdge[0]) >= 270) {
-          const arc = `L${getEdgeCoords(currentNode[0].x, currentNode[0].y, direction)}`
-            + `A${hw},${hw},0,0,1,${getEdgeCoords(currentNode[0].x, currentNode[0].y, nextEdge[0])}`
-          if (perimeter) {
-            perimeterPath += arc
-          } else {
-            internalPath += arc
-          }
-        }
+      let direction = initialDirection
+      let currentNode = startNode
+      let initial = true
+      let path = ''
+
+      while (currentNode) {
+        const nextEdge = currentNode[1]
+          .sort((a, b) => mod360(a[0] + 180 - direction - 1)
+            - mod360(b[0] + 180 - direction - 1))[0]
+
+        path = path.concat(renderCorner(
+          currentNode[0].x,
+          currentNode[0].y,
+          direction,
+          nextEdge[0],
+          halfLineWidth,
+          initial
+        ))
+
         const edgePos = {
           x: (currentNode[0].x + nextEdge[1].x) / 2,
           y: (currentNode[0].y + nextEdge[1].y) / 2,
         }
-        if (panel.elements.filter(element =>
-          element.type === 'gap'
-          && element.pos.x === edgePos.x
-          && element.pos.y === edgePos.y
-        ).length > 0) {
-          const gapEnd = `L${getCoords(edgePos.x, edgePos.y, nextEdge[0])}`
-            + `L${getCoords(edgePos.x, edgePos.y, mod360(nextEdge[0] - 90))}`
-            + `L${getCoords(currentNode[0].x, currentNode[0].y, mod360(nextEdge[0] + 180))}`
-          if (perimeter) {
-            perimeterPath += gapEnd
-          } else {
-            internalPath += gapEnd
-          }
-
-          currentNode[1].splice(currentNode[1].indexOf(nextEdge), 1)
-          if (currentNode.length < 2 || currentNode[1].length === 0) {
-            sortedNodes.splice(sortedNodes.indexOf(currentNode), 1)
-          }
+        const endElement = getEndElement(currentNode[0].x, currentNode[0].y)
+        if (getGapElement(edgePos.x, edgePos.y)) {
+          const nextDirection = mod360(nextEdge[0] + 180)
+          path = path.concat(renderGap(
+            edgePos.x,
+            edgePos.y,
+            nextEdge[0],
+            halfLineWidth,
+            0.15
+          ))
+          direction = nextDirection
+          removeEdge(nodes, currentNode, nextEdge)
+        } else if (endElement && endElement.dir === nextEdge[0]) {
+          path = path.concat(renderEnd(
+            nextEdge[1].x,
+            nextEdge[1].y,
+            endElement.dir,
+            halfLineWidth
+          ))
           direction = mod360(nextEdge[0] + 180)
+          removeEdge(nodes, currentNode, nextEdge)
         } else {
-          const line = `L${getCoords(nextEdge[1].x, nextEdge[1].y, nextEdge[0])}`
-          if (perimeter) {
-            perimeterPath += line
-          } else {
-            internalPath += line
-          }
-
-          currentNode[1].splice(currentNode[1].indexOf(nextEdge), 1)
-          if (currentNode.length < 2 || currentNode[1].length === 0) {
-            sortedNodes.splice(sortedNodes.indexOf(currentNode), 1)
-          }
           direction = nextEdge[0]
-          currentNode = sortedNodes.find(node => JSON.stringify(node[0]) === JSON.stringify(nextEdge[1]))
+          removeEdge(nodes, currentNode, nextEdge)
+          currentNode = nodes.find(node => JSON.stringify(node[0]) === JSON.stringify(nextEdge[1]))
         }
 
+        initial = false
+
         if (!currentNode || (currentNode === startNode && initialDirection === direction)) {
-          break;
+          path = path.concat('Z')
+          break
         }
       }
 
+      if (perimeter) {
+        perimeters.push(path)
+      } else {
+        internals.push(path)
+      }
+
       // Set up for the next contour
-      startNode = sortedNodes[0]
+      startNode = nodes[0]
     }
+
+    const backgroundPath = perimeters
+      .reduce((accumulator, current) => accumulator.concat(current), '')
+    const gridPath = backgroundPath.concat(internals
+      .reduce((accumulator, current) => accumulator.concat(current), ''))
 
     return (
       <>
-        <path d={perimeterPath} style={getStyle(panel.style.gridBackground)} />
-        <path d={perimeterPath + internalPath} style={getStyle(panel.style.gridColor)} />
+        <path d={backgroundPath} style={getFillStyle(panel.style.gridBackground)} />
+        <path d={gridPath} style={getFillStyle(panel.style.gridColor)} />
       </>
     )
   }
@@ -173,10 +182,10 @@ const Panel = ({ panel, width, height }) => {
     <div style={containerStyle}>
       <svg
         xmlns='http://www.w3.org/2000/svg'
-        viewBox={viewBox}>
+        viewBox={`0 0 ${panelWidth} ${panelHeight}`}>
         <Defs panel={panel} />
-        <rect width={panelWidth} height={panelHeight} style={getStyle(panel.style.panelBackground)} />
-        <g transform={`translate(1,1)`}>
+        <rect width={panelWidth} height={panelHeight} style={getFillStyle(panel.style.panelBackground)} />
+        <g transform='translate(1,1)'>
           {renderGrid()}
           {panel.elements.map(element =>
             <Element key={element.id} panelId={panel.id} element={element} />
