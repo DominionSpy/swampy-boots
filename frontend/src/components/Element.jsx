@@ -7,37 +7,38 @@ const Element = ({ panelId, element }) => {
   const style = element.color ? getStyle(element.color) : ''
 
   switch (element.type) {
-    case 'start':
-      return (
-        <use href={'#start' + panelId} transform={transform} />
-      )
-    case 'end':
-      return (
-        <use href={'#end' + panelId} transform={transform} />
-      )
-    case 'polyomino':
-      const translateX = element.shape
-        .map(block => block.x)
-        .sort((a, b) => b - a)[0] / 2
-      const translateY = element.shape
-        .map(block => block.y)
-        .sort((a, b) => b - a)[0] / 2
-      const polyTransform = `${transform} scale(0.35) translate(-${translateX},-${translateY})`
-      let key = 0
-      return (
-        <g transform={polyTransform}>
-          {element.shape.map(block =>
-            <use
-              key={key++}
-              href={`#block${panelId}`}
-              transform={`translate(${block.x},${block.y})`}
-              style={style}
-            />
-          )}
-        </g>
-      )
-    default:
-      return
+  case 'start':
+    return (
+      <use href={`#start${panelId}`} transform={transform} />
+    )
+  case 'stone':
+    return (
+      <use href={`#stone${panelId}`} transform={transform} style={style} />
+    )
+  case 'polyomino': {
+    const translateX = element.shape
+      .map(block => block.x)
+      .sort((a, b) => b - a)[0] / 2
+    const translateY = element.shape
+      .map(block => block.y)
+      .sort((a, b) => b - a)[0] / 2
+    const polyTransform = `${transform} scale(0.35) translate(-${translateX},-${translateY})`
+    let key = 0
+    return (
+      <g transform={polyTransform}>
+        {element.shape.map(block =>
+          <use
+            key={key++}
+            href={`#block${panelId}`}
+            transform={`translate(${block.x},${block.y})`}
+            style={style}
+          />
+        )}
+      </g>
+    )
+  }
+  default:
+    return
   }
 }
 

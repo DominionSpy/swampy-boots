@@ -34,7 +34,7 @@
         "x": 1,
         "y": 3
       },
-      "color": "yellow",
+      "color": "tetrisyellow",
       "shape": [
         {
           "x": 0,
@@ -57,7 +57,7 @@
         "x": 7,
         "y": 3
       },
-      "color": "yellow",
+      "color": "tetrisyellow",
       "shape": [
         {
           "x": 0,
@@ -80,7 +80,7 @@
         "x": 13,
         "y": 3
       },
-      "color": "yellow",
+      "color": "tetrisyellow",
       "shape": [
         {
           "x": 0,

@@ -8,15 +8,9 @@ const Defs = ({ panel }) => {
 
   return (
     <defs>
-      <g id={'start' + panel.id}>
-        <circle r={lw} style={getStyle(panel.style.gridColor)} />
-      </g>
-      <g id={'end' + panel.id}>
-        <path d={endPath} style={getStyle(panel.style.gridColor)} />
-      </g>
-      <g id={'block' + panel.id}>
-        <rect x='-0.4' y='-0.4' width='0.8' height='0.8' />
-      </g>
+      <circle id={`start${panel.id}`} r={lineWidth} style={gridStyle} />
+      <rect id={`stone${panel.id}`} x='-0.3' y='-0.3' width='0.6' height='0.6' rx='0.16' />
+      <rect id={'block' + panel.id} x='-0.4' y='-0.4' width='0.8' height='0.8' />
     </defs>
   )
 }
