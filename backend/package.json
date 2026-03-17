@@ -11,6 +11,7 @@
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push",
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development node --watch index.js",
+    "dev:local": "cross-env NODE_ENV=local node --watch index.js",
     "test": "cross-env NODE_ENV=test node --test"
   },
   "dependencies": {
