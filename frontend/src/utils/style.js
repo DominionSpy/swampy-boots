@@ -30,7 +30,7 @@ const resolveColor = color => {
   return NAMED_COLORS[color.toLowerCase()] ?? color
 }
 
-export const getStyle = color => {
+export const getFillStyle = color => {
   return {
     fill: resolveColor(color),
   }
