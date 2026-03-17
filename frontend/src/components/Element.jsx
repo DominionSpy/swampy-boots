@@ -19,12 +19,11 @@ const Element = ({ panelId, element }) => {
       .map(block => block.y)
       .sort((a, b) => b - a)[0] / 2
     const polyTransform = `${transform} scale(0.35) translate(-${translateX},-${translateY})`
-    let key = 0
     return (
       <g transform={polyTransform}>
         {element.shape.map(block =>
           <use
-            key={key++}
+            key={`${block.x},${block.y}`}
             href={`#block${panelId}`}
             transform={`translate(${block.x},${block.y})`}
             style={style}
