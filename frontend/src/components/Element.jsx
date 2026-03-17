@@ -1,10 +1,10 @@
-import { getStyle } from '../utils/style'
+import { getFillStyle } from '../utils/style'
 
 const Element = ({ panelId, element }) => {
   const transform = (element.dir ? `rotate(${element.dir}) ` : '')
     + `translate(${element.pos.x}, ${element.pos.y})`
 
-  const style = element.color ? getStyle(element.color) : ''
+  const style = element.color ? getFillStyle(element.color) : ''
 
   switch (element.type) {
   case 'start':
