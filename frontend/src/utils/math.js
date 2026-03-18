@@ -2,21 +2,19 @@ const mod360 = value => (value + 360) % 360
 
 const toRads = degrees => degrees * Math.PI / 180
 
-const round2dp = value => Math.round(value * 100) / 100
+export const round3dp = value => Math.round(value * 1000) / 1000
 
 export const getAngleBetween = (inAngle, outAngle) =>
   mod360(outAngle - inAngle + 180)
 
-export const getRotate = (x, y, angle) => {
+// Rotates a set of x and y coordinates by a specified number of degrees
+export const rotate = (x, y, angle) => {
   const rads = toRads(angle)
   return {
-    x: round2dp((x * Math.cos(rads)) - (y * Math.sin(rads))),
-    y: round2dp((x * Math.sin(rads)) + (y * Math.cos(rads))),
+    x: (x * Math.cos(rads)) - (y * Math.sin(rads)),
+    y: (x * Math.sin(rads)) + (y * Math.cos(rads)),
   }
 }
-
-export const getScaledVector = (vector, scale) =>
-  round2dp(vector * scale)
 
 // Given the specified angle, calculates the x and y coordinates of a position
 // on the perimeter of a unit circle around the origin where the tangent
@@ -33,34 +31,17 @@ export const getNormal = (angle) => {
 // Calculates the x and y coordinates of the intersection of two tangent lines,
 // given both angles.
 export const getIntersection = (inAngle, outAngle) => {
-  const inNormal = getNormal(inAngle)
-  const outNormal = getNormal(outAngle)
+  // The math is more straightforward if one of the angles is vertical,
+  // so we assume the in angle is vertical, normalize the out angle relative
+  // to it and calculate y (x is -1). Then we just rotate the result by
+  // the original in angle to get the correct result.
+  const normalizedOutAngle = mod360(outAngle - inAngle)
 
-  const inTan = Math.tan(toRads(inAngle + 90))
-  const outTan = Math.tan(toRads(outAngle + 90))
+  const outNormal = getNormal(normalizedOutAngle)
+  const outTan = Math.tan(toRads(normalizedOutAngle + 90))
+  const diff = outNormal.y - (outTan * outNormal.x)
 
-  const inDiff = outNormal.y - (outTan * outNormal.x)
-  const outDiff = inNormal.y - (inTan * inNormal.x)
+  const y = -outTan + diff
 
-  const inVertical = inAngle % 180 === 0
-  const outVertical = outAngle % 180 === 0
-
-  if (inVertical) {
-    return {
-      x: inNormal.x,
-      y: (outTan * inNormal.x) + inDiff
-    }
-  } else if (outVertical) {
-    return {
-      x: outNormal.x,
-      y: (inTan * outNormal.x) + outDiff
-    }
-  }
-
-  const x = (outDiff - inDiff) / (outTan - inTan)
-
-  return {
-    x: x,
-    y: (inTan * x) + outDiff
-  }
+  return rotate(-1, y, inAngle)
 }

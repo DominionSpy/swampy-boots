@@ -40,7 +40,7 @@ describe('renderEnd', () => {
 
   test('45 degrees', () => {
     const result = renderEnd(3.29, 3.71, 45, 0.3)
-    expect(result).toBe('L3.08,3.5A0.3,0.3,0,0,1,3.5,3.92')
+    expect(result).toBe('L3.078,3.498A0.3,0.3,0,0,1,3.502,3.922')
   })
 })
 
@@ -52,6 +52,6 @@ describe('renderGap', () => {
 
   test('45 degrees', () => {
     const result = renderGap(5, 5, 45, 0.3, 0.15)
-    expect(result).toBe('L4.68,4.89L5.11,5.32')
+    expect(result).toBe('L4.682,4.894L5.106,5.318')
   })
 })

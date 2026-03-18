@@ -1,4 +1,4 @@
-import { getFillStyle } from '../utils/style.js'
+import { getFillStyle } from '../utils/style'
 
 const Defs = ({ panel }) => {
   const lineWidth = panel.style.lineWidth

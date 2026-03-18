@@ -1,6 +1,6 @@
 import { getFillStyle } from '../utils/style'
 import { renderCorner, renderEnd, renderGap } from '../utils/svg'
-import { getRotate } from '../utils/math'
+import { rotate } from '../utils/math'
 import Defs from './Defs'
 import Element from './Element'
 
@@ -50,7 +50,7 @@ const Panel = ({ panel, width, height }) => {
           const edges = []
           const endElement = getEndElement(nodeX, nodeY)
           if (endElement) {
-            const endPosition = getRotate(0, -lineWidth, endElement.dir)
+            const endPosition = rotate(0, -lineWidth, endElement.dir)
             const endX = nodeX + endPosition.x
             const endY = nodeY + endPosition.y
             edges.push([endElement.dir, { x: endX, y: endY }])
