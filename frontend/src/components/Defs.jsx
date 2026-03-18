@@ -1,12 +1,12 @@
 import { getFillStyle } from '../utils/style'
-import { renderSun } from '../utils/svg'
+import { renderStar } from '../utils/svg'
 
 const Defs = ({ panel }) => {
   const lineWidth = panel.style.lineWidth
 
   const gridStyle = getFillStyle(panel.style.gridColor)
 
-  const sunPath = renderSun(8, 0.4, 0.28)
+  const sunPath = renderStar(8, 0.4, 0.28)
 
   return (
     <defs>

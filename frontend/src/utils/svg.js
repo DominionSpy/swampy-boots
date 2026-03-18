@@ -54,7 +54,7 @@ export const renderGap = (x, y, angle, halfLineWidth, halfGapWidth) => {
   return `L${corner1}L${corner2}`
 }
 
-export const renderSun = (points, maxD, minD) => {
+export const renderStar = (points, maxD, minD) => {
   const angleDelta = 360 / points / 2
   let path = ''
   for (let p = 0; p < points; p++) {
