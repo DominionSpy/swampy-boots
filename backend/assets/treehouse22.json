@@ -1,0 +1,96 @@
+{
+  "title": "Treehouse Panel 22",
+  "style": {
+    "panelBackground": "darkgrey",
+    "gridBackground": "darkgrey",
+    "gridColor": "black",
+    "primaryLineColor": "white",
+    "lineWidth": 0.6
+  },
+  "grid": {
+    "type": "square",
+    "cols": 4,
+    "rows": 4
+  },
+  "elements": [
+    {
+      "type": "sunt",
+      "pos": {
+        "x": 3,
+        "y": 6
+      }
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 3,
+        "y": 0
+      },
+      "dir": 0
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 1,
+        "y": 1
+      },
+      "color": "green"
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "color": "magenta"
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 5,
+        "y": 1
+      },
+      "color": "green"
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "color": "orange"
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 3,
+        "y": 5
+      },
+      "color": "orange"
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 1,
+        "y": 5
+      },
+      "color": "green"
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 3,
+        "y": 5
+      },
+      "color": "magenta"
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 5,
+        "y": 5
+      },
+      "color": "green"
+    }
+  ]
+}

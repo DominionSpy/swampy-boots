@@ -53,3 +53,18 @@ export const renderGap = (x, y, angle, halfLineWidth, halfGapWidth) => {
     rotate(halfLineWidth, halfGapWidth, angle))
   return `L${corner1}L${corner2}`
 }
+
+export const renderSun = (points, maxD, minD) => {
+  const angleDelta = 360 / points / 2
+  let path = ''
+  for (let p = 0; p < points; p++) {
+    const point1 = getRelativeCoords(0, 0, 1,
+      rotate(0, -maxD, angleDelta * p * 2))
+    const point2 = getRelativeCoords(0, 0, 1,
+      rotate(0, -minD, angleDelta * ((p * 2) + 1)))
+    path = path.concat(p === 0 ? 'M' : 'L')
+      .concat(point1).concat('L').concat(point2)
+  }
+  path = path.concat('Z')
+  return path
+}
