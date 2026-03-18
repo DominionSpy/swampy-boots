@@ -56,16 +56,52 @@ const Panel = ({ panel, width, height }) => {
             edges.push([endElement.dir, { x: endX, y: endY }])
           }
           if (x > 0 && !isGap(nodeX - 1, nodeY)) {
-            edges.push([270, { x: nodeX - 2, y: nodeY }])
+            const endElement2 = getEndElement(nodeX - 1, nodeY)
+            if (endElement2) {
+              edges.push([270, { x: nodeX - 1, y: nodeY }])
+            } else {
+              edges.push([270, { x: nodeX - 2, y: nodeY }])
+            }
           }
           if (x < panel.grid.cols - 1 && !isGap(nodeX + 1, nodeY)) {
-            edges.push([90, { x : nodeX + 2, y : nodeY }])
+            const endElement2 = getEndElement(nodeX + 1, nodeY)
+            if (endElement2) {
+              edges.push([90, { x: nodeX + 1, y: nodeY }])
+              const endEdges = []
+              endEdges.push([90, { x: nodeX + 2, y: nodeY }])
+              endEdges.push([270, { x: nodeX, y: nodeY }])
+              const endPosition = rotate(0, -lineWidth, endElement2.dir)
+              const endX = nodeX + 1 + endPosition.x
+              const endY = nodeY + endPosition.y
+              endEdges.push([endElement2.dir, { x: endX, y: endY }])
+              nodes.push([{ x: nodeX + 1, y: nodeY }, endEdges])
+            } else {
+              edges.push([90, { x: nodeX + 2, y: nodeY }])
+            }
           }
           if (y > 0 && !isGap(nodeX, nodeY - 1)) {
-            edges.push([0, { x: nodeX, y: nodeY - 2 }])
+            const endElement2 = getEndElement(nodeX + 1, nodeY)
+            if (endElement2) {
+              edges.push([0, { x: nodeX, y: nodeY - 1 }])
+            } else {
+              edges.push([0, { x: nodeX, y: nodeY - 2 }])
+            }
           }
           if (y < panel.grid.rows - 1 && !isGap(nodeX, nodeY + 1)) {
-            edges.push([180, { x : nodeX, y : nodeY + 2 }])
+            const endElement2 = getEndElement(nodeX, nodeY + 1)
+            if (endElement2) {
+              edges.push([0, { x: nodeX, y: nodeY + 1 }])
+              const endEdges = []
+              endEdges.push([0, { x: nodeX, y: nodeY + 2 }])
+              endEdges.push([180, { x: nodeX, y: nodeY }])
+              const endPosition = rotate(0, -lineWidth, endElement2.dir)
+              const endX = nodeX + endPosition.x
+              const endY = nodeY + 1 + endPosition.y
+              endEdges.push([endElement2.dir, { x: endX, y: endY }])
+              nodes.push([{ x: nodeX, y: nodeY + 1 }, endEdges])
+            } else {
+              edges.push([180, { x: nodeX, y: nodeY + 2 }])
+            }
           }
           if (edges.length > 0) {
             nodes.push([{ x: nodeX, y: nodeY }, edges])
