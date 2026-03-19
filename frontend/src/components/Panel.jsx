@@ -82,6 +82,10 @@ const Panel = ({ panel, width, height }) => {
         ? a[0].y - b[0].y
         : a[0].x - b[0].x)
 
+    const maxX = nodes[nodes.length - 1][0].x
+    const maxY = nodes[nodes.length - 1][0].y
+    const backgroundPath = `M0,0L${maxX},0L${maxX},${maxY}L0,${maxY}Z`
+
     const perimeters = []
     const internals = []
 
@@ -165,9 +169,9 @@ const Panel = ({ panel, width, height }) => {
       startNode = nodes[0]
     }
 
-    const backgroundPath = perimeters
+    const perimeterPath = perimeters
       .reduce((accumulator, current) => accumulator.concat(current), '')
-    const gridPath = backgroundPath.concat(internals
+    const gridPath = perimeterPath.concat(internals
       .reduce((accumulator, current) => accumulator.concat(current), ''))
 
     return (

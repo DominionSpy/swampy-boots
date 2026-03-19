@@ -1,0 +1,160 @@
+{
+  "title": "Swamp Panel 54",
+  "style": {
+    "panelBackground": "black",
+    "gridBackground": "lightgrey",
+    "gridColor": "grey",
+    "primaryLineColor": "blue",
+    "lineWidth": 0.5
+  },
+  "grid": {
+    "type": "square",
+    "cols": 6,
+    "rows": 5
+  },
+  "elements": [
+    {
+      "type": "start",
+      "pos": {
+        "x": 0,
+        "y": 8
+      }
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 10,
+        "y": 0
+      },
+      "dir": 0
+    },
+    {
+      "type": "gap",
+      "pos": {
+        "x": 7,
+        "y": 0
+      }
+    },
+    {
+      "type": "polyomino",
+      "pos": {
+        "x": 1,
+        "y": 1
+      },
+      "color": "tetrisyellow",
+      "shape": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 1
+        }
+      ],
+      "rotatable": false
+    },
+    {
+      "type": "hollomino",
+      "pos": {
+        "x": 7,
+        "y": 1
+      },
+      "shape": [
+        {
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "type": "hollomino",
+      "pos": {
+        "x": 1,
+        "y": 3
+      },
+      "shape": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        }
+      ]
+    },
+    {
+      "type": "hollomino",
+      "pos": {
+        "x": 9,
+        "y": 3
+      },
+      "shape": [
+        {
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "type": "gap",
+      "pos": {
+        "x": 10,
+        "y": 3
+      }
+    },
+    {
+      "type": "hollomino",
+      "pos": {
+        "x": 7,
+        "y": 5
+      },
+      "shape": [
+        {
+          "x": 0,
+          "y": 0
+        },
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        }
+      ]
+    },
+    {
+      "type": "polyomino",
+      "pos": {
+        "x": 5,
+        "y": 7
+      },
+      "color": "tetrisyellow",
+      "shape": [
+        {
+          "x": 1,
+          "y": 0
+        },
+        {
+          "x": 0,
+          "y": 1
+        },
+        {
+          "x": 1,
+          "y": 1
+        }
+      ],
+      "rotatable": false
+    }
+  ]
+}
