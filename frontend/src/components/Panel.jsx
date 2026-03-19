@@ -4,18 +4,11 @@ import { rotate } from '../utils/math'
 import Defs from './Defs'
 import Element from './Element'
 
-const Panel = ({ panel, width, height }) => {
+const Panel = ({ panel }) => {
   const panelWidth = panel.grid.cols * 2
   const panelHeight = panel.grid.rows * 2
   const lineWidth = panel.style.lineWidth
   const halfLineWidth = lineWidth / 2
-
-  const containerStyle = {
-    display: 'inline-block',
-    width: width + 'px',
-    height: height + 'px',
-    verticalAlign: 'middle',
-  }
 
   const isGap = (x, y) => {
     return panel.grid.gaps &&
@@ -179,20 +172,18 @@ const Panel = ({ panel, width, height }) => {
   }
 
   return (
-    <div style={containerStyle}>
-      <svg
-        xmlns='http://www.w3.org/2000/svg'
-        viewBox={`0 0 ${panelWidth} ${panelHeight}`}>
-        <Defs panel={panel} />
-        <rect width={panelWidth} height={panelHeight} style={getFillStyle(panel.style.panelBackground)} />
-        <g transform='translate(1,1)'>
-          {renderGrid()}
-          {panel.elements.map(element =>
-            <Element key={element.id} panelId={panel.id} element={element} />
-          )}
-        </g>
-      </svg>
-    </div>
+    <svg
+      xmlns='http://www.w3.org/2000/svg'
+      viewBox={`0 0 ${panelWidth} ${panelHeight}`}>
+      <Defs panel={panel} />
+      <rect width={panelWidth} height={panelHeight} style={getFillStyle(panel.style.panelBackground)} />
+      <g transform='translate(1,1)'>
+        {renderGrid()}
+        {panel.elements.map(element =>
+          <Element key={element.id} panelId={panel.id} element={element} />
+        )}
+      </g>
+    </svg>
   )
 }
 
