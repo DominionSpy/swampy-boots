@@ -76,7 +76,7 @@ export const renderPolygon = (points, d) => {
       rotate(0, -d, angleDelta * p))
     path += `${p === 0 ? 'M' : 'L'}${point}`
   }
-  path = path.concat('Z')
+  path += 'Z'
   return path
 }
 
