@@ -62,10 +62,9 @@ export const renderStar = (points, maxD, minD) => {
       rotate(0, -maxD, angleDelta * p * 2))
     const point2 = getRelativeCoords(0, 0, 1,
       rotate(0, -minD, angleDelta * ((p * 2) + 1)))
-    path = path.concat(p === 0 ? 'M' : 'L')
-      .concat(point1).concat('L').concat(point2)
+    path += `${p === 0 ? 'M' : 'L'}${point1}L${point2}`
   }
-  path = path.concat('Z')
+  path += 'Z'
   return path
 }
 
@@ -75,8 +74,7 @@ export const renderPolygon = (points, d) => {
   for (let p = 0; p < points; p++) {
     const point = getRelativeCoords(0, 0, 1,
       rotate(0, -d, angleDelta * p))
-    path = path.concat(p === 0 ? 'M' : 'L')
-      .concat(point)
+    path += `${p === 0 ? 'M' : 'L'}${point}`
   }
   path = path.concat('Z')
   return path
@@ -92,10 +90,8 @@ export const renderFlatStar = (points, maxD, minD, width) => {
       rotate(width, -maxD, angleDelta * p * 2))
     const point3 = getRelativeCoords(0, 0, 1,
       rotate(0, -minD, angleDelta * ((p * 2) + 1)))
-    path = path.concat(p === 0 ? 'M' : 'L')
-      .concat(point1).concat('L').concat(point2)
-      .concat('L').concat(point3)
+    path += `${p === 0 ? 'M' : 'L'}${point1}L${point2}L${point3}`
   }
-  path = path.concat('Z')
+  path += 'Z'
   return path
 }
