@@ -42,11 +42,9 @@ const Element = ({ panelId, element }) => {
   }
   case 'hollomino': {
     const translateX = element.shape
-      .map(block => block.x)
-      .sort((a, b) => b - a)[0] / 2
+      .reduce((acc, block) => Math.max(acc, block.x), -Infinity) / 2
     const translateY = element.shape
-      .map(block => block.y)
-      .sort((a, b) => b - a)[0] / 2
+      .reduce((acc, block) => Math.max(acc, block.y), -Infinity) / 2
     const polyTransform = `${transform} scale(0.35) translate(-${translateX},-${translateY})`
     return (
       <g transform={polyTransform}>
