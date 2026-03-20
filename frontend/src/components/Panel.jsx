@@ -67,9 +67,8 @@ const Panel = ({ panel, width, height }) => {
             const endElement2 = getEndElement(nodeX + 1, nodeY)
             if (endElement2) {
               edges.push([90, { x: nodeX + 1, y: nodeY }])
-              const endEdges = []
-              endEdges.push([90, { x: nodeX + 2, y: nodeY }])
-              endEdges.push([270, { x: nodeX, y: nodeY }])
+              const endEdges = [[90, { x: nodeX + 2, y: nodeY }],
+                [270, { x: nodeX, y: nodeY }]]
               const endPosition = rotate(0, -lineWidth, endElement2.dir)
               const endX = nodeX + 1 + endPosition.x
               const endY = nodeY + endPosition.y
@@ -91,9 +90,8 @@ const Panel = ({ panel, width, height }) => {
             const endElement2 = getEndElement(nodeX, nodeY + 1)
             if (endElement2) {
               edges.push([0, { x: nodeX, y: nodeY + 1 }])
-              const endEdges = []
-              endEdges.push([0, { x: nodeX, y: nodeY + 2 }])
-              endEdges.push([180, { x: nodeX, y: nodeY }])
+              const endEdges = [[0, { x: nodeX, y: nodeY + 2 }],
+                [180, { x: nodeX, y: nodeY }]]
               const endPosition = rotate(0, -lineWidth, endElement2.dir)
               const endX = nodeX + endPosition.x
               const endY = nodeY + 1 + endPosition.y
