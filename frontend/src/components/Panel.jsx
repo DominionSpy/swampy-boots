@@ -75,6 +75,10 @@ const Panel = ({ panel }) => {
         ? a[0].y - b[0].y
         : a[0].x - b[0].x)
 
+    const maxX = nodes[nodes.length - 1][0].x
+    const maxY = nodes[nodes.length - 1][0].y
+    const backgroundPath = `M0,0L${maxX},0L${maxX},${maxY}L0,${maxY}Z`
+
     const perimeters = []
     const internals = []
 
@@ -100,14 +104,14 @@ const Panel = ({ panel }) => {
           .sort((a, b) => mod360(a[0] + 180 - direction - 1)
             - mod360(b[0] + 180 - direction - 1))[0]
 
-        path = path.concat(renderCorner(
+        path += renderCorner(
           currentNode[0].x,
           currentNode[0].y,
           direction,
           nextEdge[0],
           halfLineWidth,
           initial
-        ))
+        )
 
         const edgePos = {
           x: (currentNode[0].x + nextEdge[1].x) / 2,
@@ -116,22 +120,22 @@ const Panel = ({ panel }) => {
         const endElement = getEndElement(currentNode[0].x, currentNode[0].y)
         if (getGapElement(edgePos.x, edgePos.y)) {
           const nextDirection = mod360(nextEdge[0] + 180)
-          path = path.concat(renderGap(
+          path += renderGap(
             edgePos.x,
             edgePos.y,
             nextEdge[0],
             halfLineWidth,
             0.15
-          ))
+          )
           direction = nextDirection
           removeEdge(nodes, currentNode, nextEdge)
         } else if (endElement && endElement.dir === nextEdge[0]) {
-          path = path.concat(renderEnd(
+          path += renderEnd(
             nextEdge[1].x,
             nextEdge[1].y,
             endElement.dir,
             halfLineWidth
-          ))
+          )
           direction = mod360(nextEdge[0] + 180)
           removeEdge(nodes, currentNode, nextEdge)
         } else {
@@ -143,7 +147,7 @@ const Panel = ({ panel }) => {
         initial = false
 
         if (!currentNode || (currentNode === startNode && initialDirection === direction)) {
-          path = path.concat('Z')
+          path += 'Z'
           break
         }
       }
@@ -158,10 +162,10 @@ const Panel = ({ panel }) => {
       startNode = nodes[0]
     }
 
-    const backgroundPath = perimeters
-      .reduce((accumulator, current) => accumulator.concat(current), '')
-    const gridPath = backgroundPath.concat(internals
-      .reduce((accumulator, current) => accumulator.concat(current), ''))
+    const perimeterPath = perimeters
+      .reduce((accumulator, current) => accumulator + current, '')
+    const gridPath = perimeterPath + internals
+      .reduce((accumulator, current) => accumulator + current, '')
 
     return (
       <>
