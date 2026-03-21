@@ -1,0 +1,64 @@
+{
+  "title": "Logging Panel 14",
+  "style": {
+    "panelBackground": "darkgrey",
+    "gridBackground": "black",
+    "gridColor": "darkteal",
+    "primaryLineColor": "white",
+    "lineWidth": 0.6
+  },
+  "grid": {
+    "type": "square",
+    "cols": 5,
+    "rows": 5
+  },
+  "elements": [
+    {
+      "type": "start",
+      "pos": {
+        "x": 0,
+        "y": 8
+      }
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 8,
+        "y": 0
+      },
+      "dir": 45
+    },
+    {
+      "type": "eraser",
+      "pos": {
+        "x": 1,
+        "y": 1
+      },
+      "color": "magenta"
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 3,
+        "y": 3
+      },
+      "color": "magenta"
+    },
+    {
+      "type": "sun",
+      "pos": {
+        "x": 5,
+        "y": 5
+      },
+      "color": "green"
+    },
+    {
+      "type": "eraser",
+      "pos": {
+        "x": 7,
+        "y": 7
+      },
+      "color": "green"
+    }
+  ]
+}

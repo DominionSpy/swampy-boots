@@ -19,6 +19,10 @@ const Element = ({ panelId, element }) => {
     return (
       <use href={`#sun${panelId}`} transform={transform} style={style} />
     )
+  case 'eraser':
+    return (
+      <use href={`#eraser${panelId}`} transform={transform} style={style} />
+    )
   case 'polyomino': {
     const translateX = element.shape
       .map(block => block.x)
