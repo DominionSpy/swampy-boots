@@ -1,4 +1,4 @@
-const mod360 = value => (value + 360) % 360
+export const mod360 = value => (value + 360) % 360
 
 const toRads = degrees => degrees * Math.PI / 180
 
