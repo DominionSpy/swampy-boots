@@ -1,0 +1,85 @@
+{
+  "title": "Pill Tutorial Panel 3",
+  "style": {
+    "panelBackground": "green",
+    "gridBackground": "green",
+    "gridColor": "darkgreen",
+    "primaryPathColor": "lime",
+    "lineWidth": 0.5
+  },
+  "grid": {
+    "type": "square",
+    "cols": 4,
+    "rows": 4,
+    "gaps": [
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 2
+      },
+      {
+        "x": 4,
+        "y": 5
+      }
+    ]
+  },
+  "elements": [
+    {
+      "type": "start",
+      "pos": {
+        "x": 0,
+        "y": 6
+      }
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 6,
+        "y": 0
+      },
+      "dir": 0
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 2,
+        "y": 2
+      }
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 4,
+        "y": 2
+      }
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 0,
+        "y": 4
+      }
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 2,
+        "y": 4
+      }
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 6,
+        "y": 6
+      }
+    }
+  ]
+}

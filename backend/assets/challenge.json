@@ -1,0 +1,117 @@
+{
+  "title": "Challenge Panel",
+  "style": {
+    "panelBackground": "skyblue",
+    "gridBackground": "skyblue",
+    "gridColor": "lightblue",
+    "primaryPathColor": "cyan",
+    "secondaryPathColor": "yellow",
+    "lineWidth": 0.6
+  },
+  "grid": {
+    "type": "square",
+    "cols": 7,
+    "rows": 7,
+    "symmetry": "rotational"
+  },
+  "elements": [
+    {
+      "type": "start",
+      "pos": {
+        "x": 0,
+        "y": 12
+      }
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 0
+      },
+      "dir": 270
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 4,
+        "y": 0
+      },
+      "match": "primary"
+    },
+    {
+      "type": "gap",
+      "pos": {
+        "x": 11,
+        "y": 0
+      }
+    },
+    {
+      "type": "gap",
+      "pos": {
+        "x": 4,
+        "y": 1
+      }
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 0,
+        "y": 2
+      },
+      "match": "primary"
+    },
+    {
+      "type": "gap",
+      "pos": {
+        "x": 9,
+        "y": 2
+      }
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 4,
+        "y": 4
+      },
+      "match": "secondary"
+    },
+    {
+      "type": "gap",
+      "pos": {
+        "x": 12,
+        "y": 5
+      }
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 6,
+        "y": 8
+      },
+      "match": "both"
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 6,
+        "y": 10
+      },
+      "match": "both"
+    },
+    {
+      "type": "pill",
+      "pos": {
+        "x": 12,
+        "y": 10
+      },
+      "match": "secondary"
+    },
+    {
+      "type": "gap",
+      "pos": {
+        "x": 6,
+        "y": 11
+      }
+    }
+  ]
+}
