@@ -6,7 +6,7 @@ const Defs = ({ panel }) => {
 
   const gridStyle = getFillStyle(panel.style.gridColor)
 
-  const pillPath = renderPolygon(6, 0.25)
+  const pillPath = renderPolygon(6, 0.3)
   const hollowPath = 'M-0.4,-0.4L0.4,-0.4L0.4,0.4L-0.4,0.4Z'
     + 'M-0.2,-0.2L-0.2,0.2L0.2,0.2L0.2,-0.2Z'
   const hollowStyle = getFillStyle('blue')
