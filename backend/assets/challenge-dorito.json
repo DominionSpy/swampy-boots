@@ -5,7 +5,7 @@
     "gridBackground": "black",
     "gridColor": "gold",
     "primaryPathColor": "yellow",
-    "lineWidth": 0.6
+    "lineWidth": 0.5
   },
   "grid": {
     "type": "square",

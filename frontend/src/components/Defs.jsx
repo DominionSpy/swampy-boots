@@ -11,7 +11,7 @@ const Defs = ({ panel }) => {
   const hollowStyle = getFillStyle('blue')
   const sunPath = renderStar(8, 0.4, 0.28)
   const eraserPath = renderFlatStar(3, 0.3, 0.1, 0.08)
-  const doritoPath = renderPolygon(3, 0.3)
+  const doritoPath = renderPolygon(3, 0.5)
   const doritoStyle = getFillStyle('lightorange')
 
   return (

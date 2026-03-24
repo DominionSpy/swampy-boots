@@ -67,7 +67,7 @@ const Element = ({ panelId, element }) => {
       .reduce((acc, block) => Math.max(acc, block.x), -Infinity) / 2
     const translateY = element.shape
       .reduce((acc, block) => Math.max(acc, block.y), -Infinity) / 2
-    const shapeTransform = `${transform} translate(-${translateX},-${translateY})`
+    const shapeTransform = `${transform} scale(0.5) translate(-${translateX},-${translateY})`
     return (
       <g transform={shapeTransform}>
         {element.shape.map(block =>
