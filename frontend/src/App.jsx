@@ -1,18 +1,24 @@
 import { useState, useEffect } from 'react'
-import {
-  Routes,
-  Route,
-  useMatch,
-} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 
 import panelService from './services/panels'
 
-import ViewPanel from './routes/ViewPanel'
+import PanelView from './routes/PanelView'
 
 import Thumbnail from './components/Thumbnail'
 import Panel from './components/Panel'
 
-const Panels = ({ panels }) => {
+const PanelList = () => {
+  const [panels, setPanels] = useState([])
+
+  useEffect(() => {
+    panelService
+      .getAll()
+      .then(initialPanels => {
+        setPanels(initialPanels)
+      })
+  }, [])
+
   return (
     <>
       {panels.map(panel =>
@@ -30,26 +36,11 @@ const Panels = ({ panels }) => {
 }
 
 const App = () => {
-  const [panels, setPanels] = useState([])
-
-  useEffect(() => {
-    panelService
-      .getAll()
-      .then(initialPanels => {
-        setPanels(initialPanels)
-      })
-  }, [])
-
-  const match = useMatch('/panel/:id')
-  const panel = match
-    ? panels.find(panel => panel.id === match.params.id)
-    : null
-
   return (
     <>
       <Routes>
-        <Route path='/' element={<Panels panels={panels} />} />
-        <Route path='/panel/:id' element={<ViewPanel panel={panel} />} />
+        <Route path='/' element={<PanelList />} />
+        <Route path='/panel/:id' element={<PanelView />} />
       </Routes>
     </>
   )

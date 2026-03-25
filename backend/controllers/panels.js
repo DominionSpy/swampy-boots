@@ -8,4 +8,13 @@ panelsRouter.get('/', async (request, response) => {
   response.json(panels)
 })
 
+panelsRouter.get('/:id', async (request, response) => {
+  const panel = await Panel.findById(request.params.id)
+  if (panel) {
+    response.json(panel)
+  } else {
+    response.status(404).end()
+  }
+})
+
 module.exports = panelsRouter
