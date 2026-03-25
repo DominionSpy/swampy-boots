@@ -3,13 +3,16 @@ import { getFillStyle } from '../utils/style'
 const Element = ({ panelId, element }) => {
   const transform = (element.dir ? `rotate(${element.dir}) ` : '')
     + `translate(${element.pos.x}, ${element.pos.y})`
-
-  const style = element.color ? getFillStyle(element.color) : ''
+  const style = getFillStyle(element.color ? element.color : 'black')
 
   switch (element.type) {
   case 'start':
     return (
       <use href={`#start${panelId}`} transform={transform} />
+    )
+  case 'pill':
+    return (
+      <use href={`#pill${panelId}`} transform={transform} className={`${element.match}${panelId}`} />
     )
   case 'stone':
     return (

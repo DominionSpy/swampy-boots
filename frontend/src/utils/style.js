@@ -7,9 +7,12 @@ const NAMED_COLORS = {
   yellow: '#e0e01a',
   olive: '#5c6b22',
   lightolive: '#8a9e30',
+  lime: '#7de01a',
   green: '#1ae01a',
+  darkgreen: '#1a4d1a',
   darkteal: '#3d5d5d',
   cyan: '#1ae0e0',
+  skyblue: '#4dd0ff',
   blue: '#1a1ae0',
   lightblue: '#1a7dff',
   purple: '#7d1ab8',
@@ -18,8 +21,8 @@ const NAMED_COLORS = {
   coral: '#e01a7d',
   pink: '#c84888',
   black: '#1a1a1a',
-  darkgray: '#45444B',
-  darkgrey: '#45444B',
+  darkgray: '#45444b',
+  darkgrey: '#45444b',
   gray: '#7a7b7f',
   grey: '#7a7b7f',
   lightgray: '#c3c3c7',
@@ -27,13 +30,13 @@ const NAMED_COLORS = {
   white: '#ffffff',
 }
 
-const resolveColor = color => {
-  if (!color) return '#ffffff'
-  return NAMED_COLORS[color.toLowerCase()] ?? color
+export const getColor = color => {
+  if (!color) return 'black'
+  return NAMED_COLORS[color.toLowerCase()] ?? 'black'
 }
 
 export const getFillStyle = color => {
   return {
-    fill: resolveColor(color),
+    fill: getColor(color),
   }
 }
