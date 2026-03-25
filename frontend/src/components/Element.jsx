@@ -1,25 +1,9 @@
 import { getFillStyle } from '../utils/style'
 
-const Element = ({ panel, element }) => {
-  const panelId = panel.id
+const Element = ({ panelId, element }) => {
   const transform = (element.dir ? `rotate(${element.dir}) ` : '')
     + `translate(${element.pos.x}, ${element.pos.y})`
-
-  let color = element.color
-  switch (element.match) {
-  case 'both':
-    color = 'black'
-    break
-  case 'primary':
-    color = panel.style.primaryPathColor
-    break
-  case 'secondary':
-    color = panel.style.secondaryPathColor
-    break
-  default:
-    break
-  }
-  const style = getFillStyle(color ? color : 'black')
+  const style = getFillStyle(element.color ? element.color : 'black')
 
   switch (element.type) {
   case 'start':
@@ -28,7 +12,7 @@ const Element = ({ panel, element }) => {
     )
   case 'pill':
     return (
-      <use href={`#pill${panelId}`} transform={transform} style={style} />
+      <use href={`#pill${panelId}`} transform={transform} className={`${element.match}${panelId}`} />
     )
   case 'stone':
     return (

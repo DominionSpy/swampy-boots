@@ -30,13 +30,13 @@ const NAMED_COLORS = {
   white: '#ffffff',
 }
 
-const resolveColor = color => {
-  if (!color) return '#ffffff'
-  return NAMED_COLORS[color.toLowerCase()] ?? color
+export const getColor = color => {
+  if (!color) return 'black'
+  return NAMED_COLORS[color.toLowerCase()] ?? 'black'
 }
 
 export const getFillStyle = color => {
   return {
-    fill: resolveColor(color),
+    fill: getColor(color),
   }
 }

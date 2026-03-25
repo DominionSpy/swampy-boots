@@ -218,7 +218,7 @@ const Panel = ({ panel }) => {
       <g transform='translate(1,1)'>
         {renderGrid()}
         {panel.elements.map(element =>
-          <Element key={element.id} panel={panel} element={element} />
+          <Element key={element.id} panelId={panel.id} element={element} />
         )}
       </g>
     </svg>
