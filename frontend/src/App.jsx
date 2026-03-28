@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 
 import panelService from './services/panels'
 
+import Thumbnail from './components/Thumbnail'
 import Panel from './components/Panel'
 
 const App = () => {
@@ -18,7 +19,10 @@ const App = () => {
   return (
     <>
       {panels.map(panel =>
-        <Panel key={panel.id} panel={panel} width='150' height='150' />
+        <Thumbnail key={panel.id} width='150' height='150'
+          title={panel.title}>
+          <Panel panel={panel} />
+        </Thumbnail>
       )}
     </>
   )

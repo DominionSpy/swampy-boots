@@ -1,0 +1,128 @@
+{
+  "title": "Greenhouse Lift",
+  "style": {
+    "panelBackground": "grey",
+    "gridBackground": "grey",
+    "gridColor": "lightgrey",
+    "primaryPathColor": "white",
+    "lineWidth": 0.6
+  },
+  "grid": {
+    "type": "square",
+    "cols": 6,
+    "rows": 5
+  },
+  "elements": [
+    {
+      "type": "start",
+      "pos": {
+        "x": 0,
+        "y": 8
+      }
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 10,
+        "y": 0
+      },
+      "dir": 45
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 1,
+        "y": 1
+      },
+      "color": "cyan"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 3,
+        "y": 1
+      },
+      "color": "white"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 5,
+        "y": 1
+      },
+      "color": "white"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 9,
+        "y": 1
+      },
+      "color": "yellow"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 1,
+        "y": 3
+      },
+      "color": "cyan"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 5,
+        "y": 3
+      },
+      "color": "magenta"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 9,
+        "y": 3
+      },
+      "color": "yellow"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 1,
+        "y": 5
+      },
+      "color": "cyan"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 5,
+        "y": 5
+      },
+      "color": "magenta"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 9,
+        "y": 5
+      },
+      "color": "yellow"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 7,
+        "y": 7
+      },
+      "color": "white"
+    },
+    {
+      "type": "stone",
+      "pos": {
+        "x": 9,
+        "y": 7
+      },
+      "color": "white"
+    }
+  ]
+}
