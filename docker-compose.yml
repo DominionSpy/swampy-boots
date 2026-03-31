@@ -1,0 +1,45 @@
+services:
+  mongo:
+    image: mongo:7
+    environment:
+      MONGODB_INITDB_DATABASE: swampyBootsApp
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.stats()"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  seed:
+    build: ./seed
+    depends_on:
+      - mongo
+    environment:
+      MONGO_URI: mongodb://mongo:27017/swampyBootsApp
+    restart: on-failure
+
+  backend:
+    build: ./backend
+    ports:
+      - "3003:3003"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/swampyBootsApp
+      PORT: 3003
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_URL: http://backend:3003
+    depends_on:
+      - backend
+
+volumes:
+  mongo_data:

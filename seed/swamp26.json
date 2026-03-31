@@ -1,16 +1,16 @@
 {
   "title": "Swampy Boots",
   "style": {
-    "panelBackground": "#707715",
-    "gridBackground": "#9fb100",
-    "gridColor": "#c4be72",
-    "primaryPathColor": "#ffffff",
+    "panelBackground": "olive",
+    "gridBackground": "olive",
+    "gridColor": "lightolive",
+    "primaryPathColor": "white",
     "lineWidth": 0.5
   },
   "grid": {
     "type": "square",
-    "cols": 9,
-    "rows": 9
+    "cols": 5,
+    "rows": 5
   },
   "elements": [
     {
@@ -26,7 +26,7 @@
         "x": 8,
         "y": 0
       },
-      "dir": 270
+      "dir": 0
     },
     {
       "type": "polyomino",

@@ -1,6 +1,6 @@
 const panelsRouter = require('express').Router()
 
-const Panel = require('../models/Panel')
+const Panel = require('../models/panel')
 
 panelsRouter.get('/', async (request, response) => {
   const panels = await Panel.find()
