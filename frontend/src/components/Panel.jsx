@@ -1,15 +1,10 @@
 import { getFillStyle } from '../utils/style'
 import { renderCorner, renderEnd, renderGap } from '../utils/svg'
-import { rotate } from '../utils/math'
+import { mod360, rotate } from '../utils/math'
 import Defs from './Defs'
 import Element from './Element'
 
 const Panel = ({ panel }) => {
-  const panelWidth = panel.grid.cols * 2
-  const panelHeight = panel.grid.rows * 2
-  const lineWidth = panel.style.lineWidth
-  const halfLineWidth = lineWidth / 2
-
   const isGap = (x, y) => {
     return panel.grid.gaps &&
       panel.grid.gaps.find(g => g.x === x && g.y === y)
@@ -23,8 +18,6 @@ const Panel = ({ panel }) => {
     return panel.elements.find(e => e.type === 'end' && e.pos.x === x && e.pos.y === y)
   }
 
-  const mod360 = (value) => (value + 360) % 360
-
   const removeEdge = (nodes, node, edge) => {
     node[1].splice(node[1].indexOf(edge), 1)
     if (node.length < 2 || node[1].length === 0) {
@@ -33,6 +26,9 @@ const Panel = ({ panel }) => {
   }
 
   const renderGrid = () => {
+    const lineWidth = panel.style.lineWidth
+    const halfLineWidth = lineWidth / 2
+
     const nodes = []
     switch (panel.grid.type) {
     case 'square':
@@ -209,19 +205,31 @@ const Panel = ({ panel }) => {
     )
   }
 
+  const renderPanel = () => {
+    const panelWidth = panel.grid.cols * 2
+    const panelHeight = panel.grid.rows * 2
+
+    return (
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        viewBox={`0 0 ${panelWidth} ${panelHeight}`}>
+        <Defs panel={panel} />
+        <rect width={panelWidth} height={panelHeight} style={getFillStyle(panel.style.panelBackground)} />
+        <g transform='translate(1,1)'>
+          {renderGrid()}
+          {panel.elements.map(element =>
+            <Element key={element.id} panelId={panel.id} element={element} />
+          )}
+        </g>
+      </svg>
+    )
+  }
+
   return (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      viewBox={`0 0 ${panelWidth} ${panelHeight}`}>
-      <Defs panel={panel} />
-      <rect width={panelWidth} height={panelHeight} style={getFillStyle(panel.style.panelBackground)} />
-      <g transform='translate(1,1)'>
-        {renderGrid()}
-        {panel.elements.map(element =>
-          <Element key={element.id} panelId={panel.id} element={element} />
-        )}
-      </g>
-    </svg>
+    <>
+      {!panel && 'No panel'}
+      {panel && renderPanel()}
+    </>
   )
 }
 
