@@ -48,14 +48,6 @@ const StyleSchema = Schema({
       type: Number,
       required: true,
     },
-    panelWidth: {
-      type: Number,
-      required: true,
-    },
-    panelHeight: {
-      type: Number,
-      required: true,
-    },
   },
   {
     toJSON: {
@@ -121,6 +113,10 @@ const ElementSchema = Schema({
       type: Number,
       required: false,
     },
+    color: {
+      type: String,
+      required: false,
+    },
     shape: {
       type: [PositionSchema],
       default: undefined,
@@ -130,6 +126,10 @@ const ElementSchema = Schema({
       type: Boolean,
       required: false,
     },
+    match: {
+      type: String,
+      required: false,
+    }
   },
   {
     toJSON: {

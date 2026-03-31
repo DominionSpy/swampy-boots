@@ -1,29 +1,15 @@
-import { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 
-import panelService from './services/panels'
-
-import Thumbnail from './components/Thumbnail'
-import Panel from './components/Panel'
+import PanelList from './routes/PanelList'
+import PanelView from './routes/PanelView'
 
 const App = () => {
-  const [panels, setPanels] = useState([])
-
-  useEffect(() => {
-    panelService
-      .getAll()
-      .then(initialPanels => {
-        setPanels(initialPanels)
-      })
-  }, [])
-
   return (
     <>
-      {panels.map(panel =>
-        <Thumbnail key={panel.id} width='150' height='150'
-          title={panel.title}>
-          <Panel panel={panel} />
-        </Thumbnail>
-      )}
+      <Routes>
+        <Route path='/' element={<PanelList />} />
+        <Route path='/panel/:id' element={<PanelView />} />
+      </Routes>
     </>
   )
 }
