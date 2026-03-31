@@ -129,7 +129,7 @@ const Panel = ({ panel }) => {
       let initial = true
       let path = ''
 
-      while (currentNode) {
+      while (currentNode && currentNode[1].length > 0) {
         const nextEdge = currentNode[1]
           .sort((a, b) => mod360(a[0] + 180 - direction - 1)
             - mod360(b[0] + 180 - direction - 1))[0]
@@ -208,6 +208,10 @@ const Panel = ({ panel }) => {
   const renderPanel = () => {
     const panelWidth = panel.grid.cols * 2
     const panelHeight = panel.grid.rows * 2
+
+    if (panel.grid.type !== 'square') {
+      return 'Unsupported grid type'
+    }
 
     return (
       <svg

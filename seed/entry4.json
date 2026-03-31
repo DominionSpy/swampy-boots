@@ -9,8 +9,8 @@
   },
   "grid": {
     "type": "square",
-    "cols": 13,
-    "rows": 13
+    "cols": 7,
+    "rows": 7
   },
   "elements": [
     {
@@ -33,7 +33,7 @@
         "x": 6,
         "y": 0
       },
-      "dir": 270
+      "dir": 0
     },
     {
       "type": "gap",
