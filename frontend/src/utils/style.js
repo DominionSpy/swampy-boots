@@ -5,6 +5,7 @@ const NAMED_COLORS = {
   lightorange: '#d39630',
   tetrisyellow: '#e8b830',
   yellow: '#e0e01a',
+  gold: '#7d7d3a',
   olive: '#5c6b22',
   lightolive: '#8a9e30',
   lime: '#7de01a',
