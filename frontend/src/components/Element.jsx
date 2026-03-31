@@ -65,6 +65,24 @@ const Element = ({ panelId, element }) => {
       </g>
     )
   }
+  case 'dorito': {
+    const translateX = element.shape
+      .reduce((acc, block) => Math.max(acc, block.x), -Infinity) / 2
+    const translateY = element.shape
+      .reduce((acc, block) => Math.max(acc, block.y), -Infinity) / 2
+    const shapeTransform = `${transform} scale(0.5) translate(-${translateX},-${translateY})`
+    return (
+      <g transform={shapeTransform}>
+        {element.shape.map(block =>
+          <use
+            key={`${block.x},${block.y}`}
+            href={`#dorito${panelId}`}
+            transform={`translate(${block.x},${block.y})`}
+          />
+        )}
+      </g>
+    )
+  }
   default:
     return
   }
