@@ -5,7 +5,7 @@
     "gridBackground": "olive",
     "gridColor": "lightolive",
     "primaryPathColor": "white",
-    "lineWidth": 0.5
+    "lineWidth": 0.4
   },
   "grid": {
     "type": "square",
