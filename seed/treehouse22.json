@@ -5,7 +5,7 @@
     "gridBackground": "darkgrey",
     "gridColor": "black",
     "primaryLineColor": "white",
-    "lineWidth": 0.6
+    "lineWidth": 0.5
   },
   "grid": {
     "type": "square",
@@ -55,16 +55,16 @@
     {
       "type": "sun",
       "pos": {
-        "x": 3,
-        "y": 1
+        "x": 1,
+        "y": 3
       },
       "color": "orange"
     },
     {
       "type": "sun",
       "pos": {
-        "x": 3,
-        "y": 5
+        "x": 5,
+        "y": 3
       },
       "color": "orange"
     },

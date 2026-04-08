@@ -38,11 +38,11 @@ export const renderCorner = (x, y, inAngle, outAngle, halfLineWidth, initial = f
   return `${operation}${normal1}A${halfLineWidth},${halfLineWidth},0,0,1,${normal2}`
 }
 
-export const renderEnd = (x, y, angle, halfLineWidth) => {
+export const renderEnd = (x, y, angle, length, halfLineWidth) => {
   const corner1 = getRelativeCoords(x, y, 1,
-    rotate(-halfLineWidth, 0, angle))
+    rotate(-halfLineWidth, -length, angle))
   const corner2 = getRelativeCoords(x, y, 1,
-    rotate(halfLineWidth, 0, angle))
+    rotate(halfLineWidth, -length, angle))
   return `L${corner1}A${halfLineWidth},${halfLineWidth},0,0,1,${corner2}`
 }
 

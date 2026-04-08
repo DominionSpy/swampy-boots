@@ -16,10 +16,13 @@
     border-top-right-radius: 10px;
     background-color: #3f3f3f;
     color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .placeholder {
     width: var(--thumbnail-width, 0px);
     height: var(--thumbnail-height, 0px);
-    padding: 10px;
+    margin: 10px;
 }
