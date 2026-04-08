@@ -1,8 +1,8 @@
 import { getFillStyle } from '../utils/style'
 
-const Element = ({ panelId, element }) => {
+const Element = ({ panelId, element, x, y }) => {
   const transform = (element.dir ? `rotate(${element.dir}) ` : '')
-    + `translate(${element.pos.x}, ${element.pos.y})`
+    + `translate(${x}, ${y})`
   const style = getFillStyle(element.color ? element.color : 'black')
 
   switch (element.type) {
@@ -28,11 +28,11 @@ const Element = ({ panelId, element }) => {
     )
   case 'polyomino': {
     const translateX = element.shape
-      .map(block => block.x)
-      .sort((a, b) => b - a)[0] / 2
+      .reduce((acc, block) =>
+        Math.max(acc, block.x), -Infinity) / 2
     const translateY = element.shape
-      .map(block => block.y)
-      .sort((a, b) => b - a)[0] / 2
+      .reduce((acc, block) =>
+        Math.max(acc, block.y), -Infinity) / 2
     const polyTransform = `${transform} scale(0.35) translate(-${translateX},-${translateY})`
     return (
       <g transform={polyTransform}>
@@ -49,9 +49,11 @@ const Element = ({ panelId, element }) => {
   }
   case 'hollomino': {
     const translateX = element.shape
-      .reduce((acc, block) => Math.max(acc, block.x), -Infinity) / 2
+      .reduce((acc, block) =>
+        Math.max(acc, block.x), -Infinity) / 2
     const translateY = element.shape
-      .reduce((acc, block) => Math.max(acc, block.y), -Infinity) / 2
+      .reduce((acc, block) =>
+        Math.max(acc, block.y), -Infinity) / 2
     const polyTransform = `${transform} scale(0.35) translate(-${translateX},-${translateY})`
     return (
       <g transform={polyTransform}>

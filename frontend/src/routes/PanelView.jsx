@@ -14,7 +14,7 @@ const PanelView = () => {
       .then(initialPanel => {
         setPanel(initialPanel)
       })
-  }, [])
+  }, [match.params.id])
 
   return (
     <div style={{ width: '360px', height: '360px' }}>

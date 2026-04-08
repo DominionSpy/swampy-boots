@@ -1,0 +1,106 @@
+{
+  "title": "Desert Panel 3",
+  "style": {
+    "panelBackground": "darkorange",
+    "gridBackground": "darkorange",
+    "gridColor": "darkbrown",
+    "primaryPathColor": "orange",
+    "lineWidth": 0.3
+  },
+  "grid": {
+    "type": "triangle-h",
+    "cols": [2,3,2]
+  },
+  "elements": [
+    {
+      "type": "start",
+      "pos": {
+        "x": 2,
+        "y": 0
+      }
+    },
+    {
+      "type": "start",
+      "pos": {
+        "x": 0,
+        "y": 2
+      }
+    },
+    {
+      "type": "start",
+      "pos": {
+        "x": 4,
+        "y": 2
+      }
+    },
+    {
+      "type": "start",
+      "pos": {
+        "x": 0,
+        "y": 6
+      }
+    },
+    {
+      "type": "start",
+      "pos": {
+        "x": 4,
+        "y": 6
+      }
+    },
+    {
+      "type": "start",
+      "pos": {
+        "x": 2,
+        "y": 8
+      }
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 2,
+        "y": 0
+      },
+      "dir": 0
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 2
+      },
+      "dir": 300
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 4,
+        "y": 2
+      },
+      "dir": 60
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 6
+      },
+      "dir": 240
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 4,
+        "y": 6
+      },
+      "dir": 120
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 2,
+        "y": 8
+      },
+      "dir": 180
+    }
+  ]
+}

@@ -1,103 +1,103 @@
 {
   "title": "Town Glare Panel",
   "style": {
-    "panelBackground": "#7f5b00",
-    "gridBackground": "#7f5b00",
-    "gridColor": "#1e0f00",
-    "primaryPathColor": "#fcfc00",
-    "lineWidth": 0.6
+    "panelBackground": "lightorange",
+    "gridBackground": "lightorange",
+    "gridColor": "darkbrown",
+    "primaryPathColor": "orange",
+    "lineWidth": 0.3
   },
   "grid": {
-    "type": "triangle",
-    "cols": [3,5,3,5,3,5,3]
+    "type": "triangle-v",
+    "rows": [2,3,2,3,2,3,2]
   },
   "elements": [
     {
       "type": "start",
       "pos": {
-        "x": 2,
+        "x": 4,
         "y": 2
       }
     },
     {
       "type": "end",
       "pos": {
-        "x": 0,
+        "x": 2,
         "y": 0
       },
-      "dir": 240
+      "dir": 330
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 6,
+        "y": 0
+      },
+      "dir": 30
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 2
+      },
+      "dir": 270
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 8,
+        "y": 2
+      },
+      "dir": 90
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 6
+      },
+      "dir": 270
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 8,
+        "y": 6
+      },
+      "dir": 90
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 0,
+        "y": 10
+      },
+      "dir": 270
+    },
+    {
+      "type": "end",
+      "pos": {
+        "x": 8,
+        "y": 10
+      },
+      "dir": 90
     },
     {
       "type": "end",
       "pos": {
         "x": 2,
-        "y": 0
-      },
-      "dir": 300
-    },
-    {
-      "type": "end",
-      "pos": {
-        "x": 0,
-        "y": 2
-      },
-      "dir": 180
-    },
-    {
-      "type": "end",
-      "pos": {
-        "x": 4,
-        "y": 2
-      },
-      "dir": 0
-    },
-    {
-      "type": "end",
-      "pos": {
-        "x": 0,
-        "y": 6
-      },
-      "dir": 180
-    },
-    {
-      "type": "end",
-      "pos": {
-        "x": 4,
-        "y": 6
-      },
-      "dir": 0
-    },
-    {
-      "type": "end",
-      "pos": {
-        "x": 0,
-        "y": 10
-      },
-      "dir": 180
-    },
-    {
-      "type": "end",
-      "pos": {
-        "x": 4,
-        "y": 10
-      },
-      "dir": 0
-    },
-    {
-      "type": "end",
-      "pos": {
-        "x": 0,
         "y": 12
       },
-      "dir": 120
+      "dir": 210
     },
     {
       "type": "end",
       "pos": {
-        "x": 4,
+        "x": 6,
         "y": 12
       },
-      "dir": 60
+      "dir": 150
     }
   ]
 }

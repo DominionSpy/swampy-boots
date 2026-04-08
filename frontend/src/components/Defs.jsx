@@ -20,7 +20,7 @@ const Defs = ({ panel }) => {
   return (
     <>
       <defs>
-        <circle id={`start${panel.id}`} r={lineWidth} className={`gridColor${panel.id}`} />
+        <circle id={`start${panel.id}`} r={lineWidth + 0.1} className={`gridColor${panel.id}`} />
         <path id={`pill${panel.id}`} d={pillPath} transform='rotate(90)' />
         <rect id={`stone${panel.id}`} x='-0.3' y='-0.3' width='0.6' height='0.6' rx='0.16' />
         <rect id={`block${panel.id}`} x='-0.4' y='-0.4' width='0.8' height='0.8' />
